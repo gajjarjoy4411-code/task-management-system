@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>My Tasks</title>
+<link rel="stylesheet" href="css/style.css" />
+<script src="js/theme.js"></script>
+</head>
+<body>
+
+<div class="bg-scene">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+</div>
+
+<div class="mytasks-page">
+  <div class="mytasks-top-row">
+    <button onclick="history.back()" class="back-link">← Back</button>
+    <button id="theme-toggle-btn" class="theme-toggle-btn" title="Toggle theme">🌙</button>
+  </div>
+
+  <section class="tasks-toolbar">
+    <h2>My Tasks</h2>
+    <button id="open-drawer-btn" class="btn-add-small">+ Add Task</button>
+  </section>
+
+  <!-- WORKSPACES -->
+  <section class="workspace-tabs" id="workspace-tabs">
+    <button class="workspace-tab active" data-workspace="">All</button>
+  </section>
+
+  <section class="filter-bar">
+    <input type="text" id="search-input" placeholder="🔍 Search tasks..." />
+    <select id="status-filter">
+      <option value="">All statuses</option>
+      <option value="pending">Pending</option>
+      <option value="in-progress">In Progress</option>
+      <option value="completed">Completed</option>
+    </select>
+    <select id="priority-filter">
+      <option value="">All priorities</option>
+      <option value="high">🔴 High</option>
+      <option value="medium">🟡 Medium</option>
+      <option value="low">🟢 Low</option>
+    </select>
+  </section>
+
+  <section id="task-list" class="task-list">
+    <p class="empty-msg" id="empty-msg">No tasks yet.</p>
+  </section>
+</div>
+
+<!-- ADD TASK POPUP (centered) -->
+<div id="add-task-drawer" class="drawer-overlay">
+  <div class="drawer-panel">
+    <div class="drawer-header">
+      <h3 id="drawer-title">New Task</h3>
+      <button id="close-drawer-btn" class="icon-btn" title="Close">✕</button>
+    </div>
+
+    <form id="task-form" class="drawer-form">
+      <input type="hidden" id="task-id" value="" />
+
+      <label>Title</label>
+      <input type="text" id="task-title" placeholder="Task title..." required />
+
+      <label>Description</label>
+      <textarea id="task-description" placeholder="Write as much as you need — this box grows with your text..." rows="4"></textarea>
+
+      <label>Workspace</label>
+      <select id="task-workspace"></select>
+
+      <label>Priority</label>
+      <div class="priority-picker" id="priority-picker">
+        <button type="button" class="priority-option" data-priority="low">🟢 Low</button>
+        <button type="button" class="priority-option selected" data-priority="medium">🟡 Medium</button>
+        <button type="button" class="priority-option" data-priority="high">🔴 High</button>
+      </div>
+      <input type="hidden" id="task-priority" value="medium" />
+
+      <label>Deadline</label>
+      <input type="date" id="task-deadline" />
+
+      <button type="submit" class="btn-primary" id="task-submit-btn">+ Add Task</button>
+      <p class="error-msg" id="task-error"></p>
+    </form>
+  </div>
+</div>
+
+<!-- DELETE CONFIRMATION POPUP -->
+<div id="delete-modal" class="modal-overlay">
+  <div class="modal-box">
+    <h3>Do you want to delete the task?</h3>
+    <p>This action cannot be undone.</p>
+    <div class="modal-actions">
+      <button id="cancel-delete-btn" class="btn-secondary">Cancel</button>
+      <button id="confirm-delete-btn" class="btn-primary delete-confirm">Delete</button>
+    </div>
+  </div>
+</div>
+
+<!-- ADD WORKSPACE POPUP -->
+<div id="add-workspace-modal" class="modal-overlay">
+  <div class="modal-box">
+    <h3>New Workspace</h3>
+    <form id="add-workspace-form" class="workspace-form">
+      <label>Name</label>
+      <input type="text" id="new-workspace-name" placeholder="e.g. Fitness" maxlength="20" required />
+
+      <label>Icon</label>
+      <div class="icon-picker" id="icon-picker">
+        <button type="button" class="icon-option selected" data-icon="⚪">⚪</button>
+        <button type="button" class="icon-option" data-icon="🔴">🔴</button>
+        <button type="button" class="icon-option" data-icon="🟠">🟠</button>
+        <button type="button" class="icon-option" data-icon="🟡">🟡</button>
+        <button type="button" class="icon-option" data-icon="🟢">🟢</button>
+        <button type="button" class="icon-option" data-icon="🔵">🔵</button>
+        <button type="button" class="icon-option" data-icon="🟣">🟣</button>
+        <button type="button" class="icon-option" data-icon="🟤">🟤</button>
+      </div>
+
+      <p class="error-msg" id="workspace-error"></p>
+      <div class="modal-actions">
+        <button type="button" id="cancel-add-workspace-btn" class="btn-secondary">Cancel</button>
+        <button type="submit" class="btn-primary">Create</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- DELETE WORKSPACE POPUP -->
+<div id="delete-workspace-modal" class="modal-overlay">
+  <div class="modal-box">
+    <h3>Delete this workspace?</h3>
+    <p>Any tasks in it will be moved to Personal.</p>
+    <div class="modal-actions">
+      <button id="cancel-delete-workspace-btn" class="btn-secondary">Cancel</button>
+      <button id="confirm-delete-workspace-btn" class="btn-primary delete-confirm">Delete</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/common.js"></script>
+<script src="js/mytasks.js"></script>
+</body>
+</html>

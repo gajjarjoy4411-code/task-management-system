@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>My Profile</title>
+<link rel="stylesheet" href="css/style.css" />
+<script src="js/theme.js"></script>
+</head>
+<body>
+
+<div class="bg-scene">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+</div>
+
+<div class="profile-page">
+  <div class="mytasks-top-row">
+    <button onclick="history.back()" class="back-link">← Back</button>
+    <button id="theme-toggle-btn" class="theme-toggle-btn" title="Toggle theme">🌙</button>
+  </div>
+
+  <div class="profile-card">
+    <button id="edit-btn" class="edit-btn" title="Edit profile">✏️</button>
+
+    <div class="avatar-wrap">
+      <div class="profile-avatar" id="profile-avatar">?</div>
+      <img id="profile-avatar-img" class="profile-avatar-img" style="display:none;" />
+      <label for="avatar-input" id="avatar-upload-label" class="avatar-upload-label" style="display:none;">📷</label>
+      <input type="file" id="avatar-input" accept="image/*" style="display:none;" />
+    </div>
+
+    <!-- VIEW MODE -->
+    <div id="view-mode">
+      <h3 id="profile-name">Loading...</h3>
+      <p class="profile-email" id="profile-email"></p>
+    </div>
+
+    <!-- EDIT MODE -->
+    <form id="edit-form" class="edit-form" style="display:none;">
+      <label>Name</label>
+      <input type="text" id="edit-name" required />
+
+      <label>Email</label>
+      <input type="email" id="edit-email" required />
+
+      <div class="edit-actions">
+        <button type="button" id="cancel-edit-btn" class="btn-secondary">Cancel</button>
+        <button type="submit" class="btn-primary">Save Changes</button>
+      </div>
+      <p class="error-msg" id="edit-error"></p>
+    </form>
+  </div>
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/common.js"></script>
+<script src="js/profile.js"></script>
+</body>
+</html>

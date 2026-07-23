@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Kanban Board</title>
+<meta charset="UTF-5" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<subtitle>Organize tasks, track progress and get things done</subtitle>
+<link rel="stylesheet" href="css/style.css" />
+<script src="js/theme.js"></script>
+</head>
+<body>
+
+<div class="bg-scene">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+</div>
+
+<div class="dashboard">
+  <header class="dashboard-header">
+    <div class="brand">
+      <span class="brand-icon">◆</span>
+      <h1>Flowlist</h1>
+    </div>
+
+    <div class="header-right">
+      <span id="user-name"></span>
+      <button id="theme-toggle-btn" class="theme-toggle-btn" title="Toggle theme">🌙</button>
+      <button onclick="window.location='dashboard.html'" class="btn-secondary">← Dashboard</button>
+    </div>
+  </header>
+
+  <div class="kanban-title-row">
+  <h2>Kanban Board</h2>
+  <button id="kanban-add-task-btn" class="btn-add-small">+ Add Task</button>
+</div>
+
+  <div class="kanban-board">
+    <div class="kanban-column" data-status="pending">
+      <div class="kanban-column-header">
+  <div>
+    <span class="kanban-col-title">🟠 Pending</span>
+    <span class="kanban-col-subtitle"><span id="count-pending">0</span> Tasks</span>
+  </div>
+</div>
+<div class="kanban-col-divider"></div>
+      <div class="kanban-cards" id="col-pending"></div>
+    </div>
+
+    <div class="kanban-column" data-status="in-progress">
+      <div class="kanban-column-header">
+  <div>
+    <span class="kanban-col-title">🔵 In Progress</span>
+    <span class="kanban-col-subtitle"><span id="count-in-progress">0</span> Tasks</span>
+  </div>
+</div>
+<div class="kanban-col-divider"></div>
+      <div class="kanban-cards" id="col-in-progress"></div>
+    </div>
+
+    <div class="kanban-column" data-status="completed">
+      <div class="kanban-column-header">
+  <div>
+    <span class="kanban-col-title">🟢 Completed</span>
+    <span class="kanban-col-subtitle"><span id="count-completed">0</span> Tasks</span>
+  </div>
+</div>
+<div class="kanban-col-divider"></div>
+      <div class="kanban-cards" id="col-completed"></div>
+    </div>
+  </div>
+</div>
+
+<!-- VIEW/EDIT TASK POPUP (centered) -->
+<div id="add-task-drawer" class="drawer-overlay">
+  <div class="drawer-panel">
+    <div class="drawer-header">
+      <h3 id="drawer-title">View Task</h3>
+      <div style="display:flex; align-items:center; gap:8px;">
+        <div class="kebab-menu">
+          <button class="kebab-btn" id="task-kebab-btn" title="More actions">⋮</button>
+          <div class="kebab-dropdown" id="task-kebab-dropdown">
+            <button class="kebab-item" id="drawer-edit-btn">✏️ Edit</button>
+            <button class="kebab-item delete" id="drawer-delete-btn">🗑️ Delete</button>
+          </div>
+        </div>
+        <button id="close-drawer-btn" class="icon-btn" title="Close">✕</button>
+      </div>
+    </div>
+
+    <form id="task-form" class="drawer-form">
+      <input type="hidden" id="task-id" value="" />
+
+      <label>Title</label>
+      <input type="text" id="task-title" placeholder="Task title..." required />
+
+      <label>Description</label>
+      <textarea id="task-description" rows="6"></textarea>
+
+      <label>Workspace</label>
+      <select id="task-workspace"></select>
+
+      <label>Priority</label>
+      <div class="priority-picker" id="priority-picker">
+        <button type="button" class="priority-option" data-priority="low">🟢 Low</button>
+        <button type="button" class="priority-option selected" data-priority="medium">🟡 Medium</button>
+        <button type="button" class="priority-option" data-priority="high">🔴 High</button>
+      </div>
+      <input type="hidden" id="task-priority" value="medium" />
+
+      <label>Deadline</label>
+      <input type="date" id="task-deadline" />
+
+      <button type="submit" class="btn-primary" id="task-submit-btn">Save Changes</button>
+      <p class="error-msg" id="task-error"></p>
+    </form>
+  </div>
+</div>
+
+<!-- DELETE CONFIRMATION POPUP -->
+<div id="delete-modal" class="modal-overlay">
+  <div class="modal-box">
+    <h3>Do you want to delete the task?</h3>
+    <p>This action cannot be undone.</p>
+    <div class="modal-actions">
+      <button id="cancel-delete-btn" class="btn-secondary">Cancel</button>
+      <button id="confirm-delete-btn" class="btn-primary delete-confirm">Delete</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/common.js"></script>
+<script src="js/kanban.js"></script>
+</body>
+</html>

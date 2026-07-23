@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Task Manager - Dashboard</title>
+<link rel="stylesheet" href="css/style.css" />
+<script src="js/theme.js"></script>
+
+<!-- FullCalendar CSS -->
+<link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="bg-scene">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+</div>
+
+<div class="dashboard">
+  <header class="dashboard-header">
+    <div class="brand">
+      <span class="brand-icon">◆</span>
+      <h1>Flowlist</h1>
+    </div>
+
+    <div class="header-right">
+      <span id="user-name"></span>
+
+      <button id="theme-toggle-btn" class="theme-toggle-btn" title="Toggle theme">🌙</button>
+
+      <div class="notif-menu">
+        <button id="notif-btn" class="notif-btn" title="Notifications">
+          🔔
+          <span id="notif-badge" class="notif-badge" style="display:none;">0</span>
+        </button>
+
+        <div id="notif-dropdown" class="notif-dropdown">
+          <div class="notif-header">
+            <span>Notifications</span>
+            <button id="mark-all-read-btn">Mark all read</button>
+          </div>
+          <div id="notif-list" class="notif-list">
+            <p class="notif-empty">No notifications yet.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="profile-menu">
+        <button id="profile-btn" class="profile-btn" title="Account">👤</button>
+
+        <div id="profile-dropdown" class="profile-dropdown">
+          <a href="profile.html">👤 My Profile</a>
+          <a href="mytasks.html">📋 My Tasks</a>
+          <a href="kanban.html">📊 Kanban Board</a>
+          <div class="divider"></div>
+          <button id="logout-btn">🚪 Logout</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- STATS -->
+  <section class="stats-grid">
+  <div class="stat-card total">
+  <div class="stat-icon stat-icon-total">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3L2 8l10 5 10-5-10-5z"/><path d="M2 13l10 5 10-5"/><path d="M2 18l10 5 10-5"/></svg>
+</div>
+    <span class="stat-number" id="stat-total">0</span>
+    <span class="stat-label">Total</span>
+  </div>
+  <div class="stat-card pending">
+   <div class="stat-icon stat-icon-pending">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+</div>
+    <span class="stat-number" id="stat-pending">0</span>
+    <span class="stat-label">Pending</span>
+  </div>
+  <div class="stat-card in-progress">
+   <div class="stat-icon stat-icon-progress">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+    <rect x="2" y="9" width="20" height="6" rx="3" stroke="currentColor" stroke-width="1.5"/>
+    <rect x="4" y="11" width="11" height="2" rx="1" fill="currentColor"/>
+  </svg>
+</div>
+    <span class="stat-number" id="stat-inprogress">0</span>
+    <span class="stat-label">In Progress</span>
+  </div>
+  <div class="stat-card completed">
+    <div class="stat-icon stat-icon-completed">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg>
+</div>
+    <span class="stat-number" id="stat-completed">0</span>
+    <span class="stat-label">Completed</span>
+  </div>
+</section>
+
+  <!-- TASKS TOOLBAR -->
+  <section class="tasks-toolbar">
+    <h2>Your Tasks</h2>
+    <div style="display:flex; gap:10px;">
+      <button id="calendar-view-btn" class="btn-secondary">📅 Calendar</button>
+      <button id="open-drawer-btn" class="btn-add-small">+ Add Task</button>
+    </div>
+  </section>
+
+  <!-- WORKSPACES -->
+  <section class="workspace-tabs" id="workspace-tabs">
+    <button class="workspace-tab active" data-workspace="">All</button>
+  </section>
+
+  <!-- FILTER / SEARCH -->
+  <section class="filter-bar">
+    <input type="text" id="search-input" placeholder="🔍 Search tasks..." />
+    <select id="status-filter">
+      <option value="">All statuses</option>
+      <option value="pending">Pending</option>
+      <option value="in-progress">In Progress</option>
+      <option value="completed">Completed</option>
+    </select>
+    <select id="priority-filter">
+      <option value="">All priorities</option>
+      <option value="high">🔴 High</option>
+      <option value="medium">🟡 Medium</option>
+      <option value="low">🟢 Low</option>
+    </select>
+  </section>
+
+  <!-- TASK LIST -->
+  <section id="task-list" class="task-list">
+    <p class="empty-msg" id="empty-msg">No tasks yet. Add one above!</p>
+  </section>
+</div>
+
+<!-- ADD TASK POPUP (centered) -->
+<div id="add-task-drawer" class="drawer-overlay">
+  <div class="drawer-panel">
+    <div class="drawer-header">
+      <h3 id="drawer-title">New Task</h3>
+      <button id="close-drawer-btn" class="icon-btn" title="Close">✕</button>
+    </div>
+
+    <form id="task-form" class="drawer-form">
+      <input type="hidden" id="task-id" value="" />
+
+      <label>Title</label>
+      <input type="text" id="task-title" placeholder="Task title..." required />
+
+      <label>Description</label>
+      <textarea id="task-description" placeholder="Write as much as you need — this box grows with your text..." rows="8"></textarea>
+
+      <label>Workspace</label>
+      <select id="task-workspace"></select>
+
+      <label>Priority</label>
+      <div class="priority-picker" id="priority-picker">
+        <button type="button" class="priority-option" data-priority="low">🟢 Low</button>
+        <button type="button" class="priority-option selected" data-priority="medium">🟡 Medium</button>
+        <button type="button" class="priority-option" data-priority="high">🔴 High</button>
+      </div>
+      <input type="hidden" id="task-priority" value="medium" />
+
+      <label>Deadline</label>
+      <input type="date" id="task-deadline" />
+
+      <button type="submit" class="btn-primary" id="task-submit-btn">+ Add Task</button>
+      <p class="error-msg" id="task-error"></p>
+    </form>
+  </div>
+</div>
+
+<!-- DELETE CONFIRMATION POPUP -->
+<div id="delete-modal" class="modal-overlay">
+  <div class="modal-box">
+    <h3>Do you want to delete the task?</h3>
+    <p>This action cannot be undone.</p>
+    <div class="modal-actions">
+      <button id="cancel-delete-btn" class="btn-secondary">Cancel</button>
+      <button id="confirm-delete-btn" class="btn-primary delete-confirm">Delete</button>
+    </div>
+  </div>
+</div>
+
+<!-- CALENDAR POPUP -->
+<div id="calendar-modal" class="modal-overlay">
+  <div class="modal-box calendar-modal-box">
+    <div class="drawer-header">
+      <h3>📅 Calendar</h3>
+      <button id="close-calendar-btn" class="icon-btn" title="Close">✕</button>
+    </div>
+
+    <div id="dashboard-calendar"></div>
+
+    <div id="calendar-day-panel" class="calendar-day-panel">
+      <h4 id="calendar-day-title">Select a date</h4>
+      <div id="calendar-day-tasks" class="calendar-day-tasks">
+        <p class="notif-empty">Click a date to see tasks due that day.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FullCalendar JS -->
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
+
+<!-- ADD WORKSPACE POPUP -->
+<div id="add-workspace-modal" class="modal-overlay">
+  <div class="modal-box">
+    <h3>New Workspace</h3>
+    <form id="add-workspace-form" class="workspace-form">
+      <label>Name</label>
+      <input type="text" id="new-workspace-name" placeholder="e.g. Fitness" maxlength="20" required />
+
+      <label>Icon</label>
+      <div class="icon-picker" id="icon-picker">
+        <button type="button" class="icon-option selected" data-icon="⚪">⚪</button>
+        <button type="button" class="icon-option" data-icon="🔴">🔴</button>
+        <button type="button" class="icon-option" data-icon="🟠">🟠</button>
+        <button type="button" class="icon-option" data-icon="🟡">🟡</button>
+        <button type="button" class="icon-option" data-icon="🟢">🟢</button>
+        <button type="button" class="icon-option" data-icon="🔵">🔵</button>
+        <button type="button" class="icon-option" data-icon="🟣">🟣</button>
+        <button type="button" class="icon-option" data-icon="🟤">🟤</button>
+      </div>
+
+      <p class="error-msg" id="workspace-error"></p>
+      <div class="modal-actions">
+        <button type="button" id="cancel-add-workspace-btn" class="btn-secondary">Cancel</button>
+        <button type="submit" class="btn-primary">Create</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- DELETE WORKSPACE POPUP -->
+<div id="delete-workspace-modal" class="modal-overlay">
+  <div class="modal-box">
+    <h3>Delete this workspace?</h3>
+    <p>Any tasks in it will be moved to Personal.</p>
+    <div class="modal-actions">
+      <button id="cancel-delete-workspace-btn" class="btn-secondary">Cancel</button>
+      <button id="confirm-delete-workspace-btn" class="btn-primary delete-confirm">Delete</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/common.js"></script>
+<script src="js/dashboard.js"></script>
+</body>
+</html>
