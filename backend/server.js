@@ -34,8 +34,3 @@ app.listen(PORT, () => {
   startReminderJob();
   console.log("⏰ Reminder job scheduled for 8:00 AM daily");
 });
-
-
-
-
-
