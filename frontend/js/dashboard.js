@@ -140,6 +140,23 @@ async function loadStats() {
   document.getElementById("stat-pending").textContent = stats.pending;
   document.getElementById("stat-inprogress").textContent = stats.inProgress;
   document.getElementById("stat-completed").textContent = stats.completed;
+
+  setTrend("trend-total", stats.totalNewThisWeek);
+  setTrend("trend-pending", stats.pendingNewThisWeek);
+  setTrend("trend-inprogress", stats.inProgressNewThisWeek);
+  setTrend("trend-completed", stats.completedNewThisWeek);
+}
+
+function setTrend(elId, count) {
+  const el = document.getElementById(elId);
+  if (!el) return;
+  if (count > 0) {
+    el.textContent = `↑ +${count} this week`;
+    el.style.display = "block";
+  } else {
+    el.textContent = "";
+    el.style.display = "none";
+  }
 }
 
 // ---- Load tasks ----

@@ -40,12 +40,23 @@ router.get("/", async (req, res, next) => {
 router.get("/stats/summary", async (req, res, next) => {
   try {
     const tasks = await Task.find({ user: req.user.id });
+
+    const sevenDaysAgo = new Date();
+    sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+
+    const createdThisWeek = tasks.filter((t) => new Date(t.createdAt) >= sevenDaysAgo);
+
     const summary = {
       total: tasks.length,
       pending: tasks.filter((t) => t.status === "pending").length,
       inProgress: tasks.filter((t) => t.status === "in-progress").length,
       completed: tasks.filter((t) => t.status === "completed").length,
+      totalNewThisWeek: createdThisWeek.length,
+      pendingNewThisWeek: createdThisWeek.filter((t) => t.status === "pending").length,
+      inProgressNewThisWeek: createdThisWeek.filter((t) => t.status === "in-progress").length,
+      completedNewThisWeek: createdThisWeek.filter((t) => t.status === "completed").length,
     };
+
     res.json(summary);
   } catch (err) {
     next(err);
