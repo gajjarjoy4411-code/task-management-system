@@ -184,7 +184,11 @@ async function loadTasks() {
 
 function sortByPriority(tasks) {
   const order = { high: 0, medium: 1, low: 2 };
-  return [...tasks].sort((a, b) => (order[a.priority] ?? 1) - (order[b.priority] ?? 1));
+  return [...tasks].sort((a, b) => {
+    // Starred tasks always float to the top, regardless of priority
+    if (a.starred !== b.starred) return a.starred ? -1 : 1;
+    return (order[a.priority] ?? 1) - (order[b.priority] ?? 1);
+  });
 }
 // ---- Render tasks ----
 function renderTasks(tasks) {
@@ -224,7 +228,10 @@ userWorkspaces.forEach((w) => {
 
     card.innerHTML = `
       <div class="task-info">
-        <div class="task-title">${escapeHtml(task.title)}</div>
+        <div class="task-title">
+          <button class="star-btn ${task.starred ? "starred" : ""}" data-id="${task._id}" title="Star this task">${task.starred ? "⭐" : "☆"}</button>
+          ${escapeHtml(task.title)}
+        </div>
         ${task.description ? `<div class="task-description">${escapeHtml(task.description)}</div>` : ""}
         <div class="task-meta">
           <span class="badge ${task.status}">${task.status.replace("-", " ")}</span>

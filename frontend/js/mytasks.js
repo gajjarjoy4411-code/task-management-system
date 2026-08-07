@@ -184,7 +184,11 @@ async function loadAllTasks() {
 
 function sortByPriority(tasks) {
   const order = { high: 0, medium: 1, low: 2 };
-  return [...tasks].sort((a, b) => (order[a.priority] ?? 1) - (order[b.priority] ?? 1));
+  return [...tasks].sort((a, b) => {
+    // Starred tasks always float to the top, regardless of priority
+    if (a.starred !== b.starred) return a.starred ? -1 : 1;
+    return (order[a.priority] ?? 1) - (order[b.priority] ?? 1);
+  });
 }
 function renderAllTasks(tasks) {
   const list = document.getElementById("task-list");
@@ -224,7 +228,10 @@ const priorityFlags = { high: "🚩", medium: "🚩", low: "🚩" };
    
     card.innerHTML = `
       <div class="task-info">
-        <div class="task-title">${escapeHtml(task.title)}</div>
+        <div class="task-title">
+         
+          ${escapeHtml(task.title)}
+        </div>
         ${task.description ? `<div class="task-description">${escapeHtml(task.description)}</div>` : ""}
         <div class="task-meta">
           <span class="badge ${task.status}">${task.status.replace("-", " ")}</span>
@@ -234,7 +241,8 @@ const priorityFlags = { high: "🚩", medium: "🚩", low: "🚩" };
         </div>
       </div>
       <div class="task-actions">
-        <div class="kebab-menu">
+  <button class="star-btn ${task.starred ? "starred" : ""}" data-id="${task._id}" title="Star this task">${task.starred ? "⭐" : "☆"}</button>
+  <div class="kebab-menu">
           <button class="kebab-btn" data-id="${task._id}" title="More actions">⋮</button>
           <div class="kebab-dropdown" id="kebab-${task._id}">
             <button class="kebab-item view" data-id="${task._id}">👁️ View</button>
@@ -250,8 +258,23 @@ const priorityFlags = { high: "🚩", medium: "🚩", low: "🚩" };
 
   attachTaskActionListeners();
 }
-
 function attachTaskActionListeners() {
+  document.querySelectorAll(".star-btn").forEach((btn) => {
+    btn.addEventListener("click", async (e) => {
+      e.stopPropagation();
+      const id = btn.dataset.id;
+      const task = allTasksCache.find((t) => t._id === id);
+      if (!task) return;
+
+      await apiFetch(`/tasks/${id}`, {
+        method: "PUT",
+        body: JSON.stringify({ starred: !task.starred }),
+      });
+      loadAllTasks();
+    });
+  });
+
+  
   document.querySelectorAll(".kebab-btn").forEach((btn) => {
     btn.addEventListener("click", (e) => {
       e.stopPropagation();

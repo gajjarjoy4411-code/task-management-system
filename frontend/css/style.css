@@ -866,6 +866,20 @@ select.status-select {
 .icon-btn:hover {
   background: var(--surface-alpha-3);
 }
+.star-btn {
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  font-size: 16px;
+  color: var(--color-text-light);
+  flex-shrink: 0;
+}
+
+.star-btn.starred {
+  color: #f5c518;
+}
+
 
 .kebab-menu {
   position: relative;

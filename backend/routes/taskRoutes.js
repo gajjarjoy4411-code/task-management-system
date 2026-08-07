@@ -131,6 +131,9 @@ router.put("/:id", async (req, res, next) => {
     task.deadline = req.body.deadline ?? task.deadline;
     task.workspace = req.body.workspace ?? task.workspace;
     task.priority = req.body.priority ?? task.priority;
+    task.workspace = req.body.workspace ?? task.workspace;
+    task.priority = req.body.priority ?? task.priority;
+    task.starred = req.body.starred ?? task.starred;
 
     const updatedTask = await task.save();
 
