@@ -229,7 +229,7 @@ userWorkspaces.forEach((w) => {
     card.innerHTML = `
       <div class="task-info">
         <div class="task-title">
-          <button class="star-btn ${task.starred ? "starred" : ""}" data-id="${task._id}" title="Star this task">${task.starred ? "⭐" : "☆"}</button>
+          
           ${escapeHtml(task.title)}
         </div>
         ${task.description ? `<div class="task-description">${escapeHtml(task.description)}</div>` : ""}
@@ -241,6 +241,7 @@ userWorkspaces.forEach((w) => {
         </div>
       </div>
       <div class="task-actions">
+      <button class="star-btn ${task.starred ? "starred" : ""}" data-id="${task._id}" title="Star this task">${task.starred ? "⭐" : "☆"}</button>
         <select class="status-select" data-id="${task._id}">
           <option value="pending" ${task.status === "pending" ? "selected" : ""}>Pending</option>
           <option value="in-progress" ${task.status === "in-progress" ? "selected" : ""}>In Progress</option>
