@@ -263,9 +263,25 @@ userWorkspaces.forEach((w) => {
 
   attachTaskActionListeners();
 }
-
 function attachTaskActionListeners() {
+  document.querySelectorAll(".star-btn").forEach((btn) => {
+    btn.addEventListener("click", async (e) => {
+      e.stopPropagation();
+      const id = btn.dataset.id;
+      const task = allTasksCache.find((t) => t._id === id);
+      if (!task) return;
+
+      await apiFetch(`/tasks/${id}`, {
+        method: "PUT",
+        body: JSON.stringify({ starred: !task.starred }),
+      });
+      loadTasks();
+    });
+  });
+
   document.querySelectorAll(".status-select").forEach((select) => {
+
+  
     select.addEventListener("change", async (e) => {
       await apiFetch(`/tasks/${e.target.dataset.id}`, {
         method: "PUT",
