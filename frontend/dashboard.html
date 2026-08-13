@@ -19,49 +19,49 @@
 </div>
 
 <div class="dashboard">
-  <header class="dashboard-header-wrap">
-  <div class="dashboard-header">
+  <header class="dashboard-header">
     <div class="brand">
       <span class="brand-icon">◆</span>
       <h1>Flowlist</h1>
     </div>
 
     <div class="header-right">
-      <span id="user-name"></span>
-      
+      <div class="header-right-top">
+        <span id="user-name"></span>
 
-      <button id="theme-toggle-btn" class="theme-toggle-btn" title="Toggle theme">🌙</button>
+        <button id="theme-toggle-btn" class="theme-toggle-btn" title="Toggle theme">🌙</button>
 
-      <div class="notif-menu">
-        <button id="notif-btn" class="notif-btn" title="Notifications">
-          🔔
-          <span id="notif-badge" class="notif-badge" style="display:none;">0</span>
-        </button>
+        <div class="notif-menu">
+          <button id="notif-btn" class="notif-btn" title="Notifications">
+            🔔
+            <span id="notif-badge" class="notif-badge" style="display:none;">0</span>
+          </button>
 
-        <div id="notif-dropdown" class="notif-dropdown">
-          <div class="notif-header">
-            <span>Notifications</span>
-            <button id="mark-all-read-btn">Mark all read</button>
+          <div id="notif-dropdown" class="notif-dropdown">
+            <div class="notif-header">
+              <span>Notifications</span>
+              <button id="mark-all-read-btn">Mark all read</button>
+            </div>
+            <div id="notif-list" class="notif-list">
+              <p class="notif-empty">No notifications yet.</p>
+            </div>
           </div>
-          <div id="notif-list" class="notif-list">
-            <p class="notif-empty">No notifications yet.</p>
+        </div>
+
+        <div class="profile-menu">
+          <button id="profile-btn" class="profile-btn" title="Account">👤</button>
+
+          <div id="profile-dropdown" class="profile-dropdown">
+            <a href="profile.html">👤 My Profile</a>
+            <a href="mytasks.html">📋 My Tasks</a>
+            <a href="kanban.html">📊 Kanban Board</a>
+            <div class="divider"></div>
+            <button id="logout-btn">🚪 Logout</button>
           </div>
         </div>
       </div>
-
-      <div class="profile-menu">
-        <button id="profile-btn" class="profile-btn" title="Account">👤</button>
-
-        <div id="profile-dropdown" class="profile-dropdown">
-          <a href="profile.html">👤 My Profile</a>
-          <a href="mytasks.html">📋 My Tasks</a>
-          <a href="kanban.html">📊 Kanban Board</a>
-          <div class="divider"></div>
-          <button id="logout-btn">🚪 Logout</button>
-        </div>
-      </div>
+      <div id="current-date" class="header-date"></div>
     </div>
-    <div id="current-date" class="header-date"></div>
   </header>
 
   <!-- STATS -->
