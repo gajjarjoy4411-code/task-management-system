@@ -178,8 +178,10 @@ async function loadAllTasks() {
   if (!res) return;
   const tasks = await res.json();
 
+  const hasActiveFilters = Boolean(search || status || priority || currentWorkspaceFilter);
+
   allTasksCache = sortByPriority(tasks);
-  renderAllTasks(allTasksCache);
+  renderAllTasks(allTasksCache, hasActiveFilters);
 }
 
 function sortByPriority(tasks) {
@@ -190,13 +192,16 @@ function sortByPriority(tasks) {
     return (order[a.priority] ?? 1) - (order[b.priority] ?? 1);
   });
 }
-function renderAllTasks(tasks) {
+function renderAllTasks(tasks, hasActiveFilters = false) {
   const list = document.getElementById("task-list");
   const emptyMsg = document.getElementById("empty-msg");
 
   list.innerHTML = "";
 
   if (tasks.length === 0) {
+    emptyMsg.textContent = hasActiveFilters
+      ? "Task not found."
+      : "No tasks yet.";
     list.appendChild(emptyMsg);
     emptyMsg.style.display = "block";
     return;

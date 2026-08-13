@@ -177,8 +177,10 @@ async function loadTasks() {
   if (!res) return;
   const tasks = await res.json();
 
+  const hasActiveFilters = Boolean(search || status || priority || currentWorkspaceFilter);
+
   allTasksCache = sortByPriority(tasks);
-  renderTasks(allTasksCache);
+  renderTasks(allTasksCache, hasActiveFilters);
   loadStats();
 }
 
@@ -191,13 +193,16 @@ function sortByPriority(tasks) {
   });
 }
 // ---- Render tasks ----
-function renderTasks(tasks) {
+function renderTasks(tasks, hasActiveFilters = false) {
   const list = document.getElementById("task-list");
   const emptyMsg = document.getElementById("empty-msg");
 
   list.innerHTML = "";
 
   if (tasks.length === 0) {
+    emptyMsg.textContent = hasActiveFilters
+      ? "Task not found."
+      : "No tasks yet. Add one above!";
     list.appendChild(emptyMsg);
     emptyMsg.style.display = "block";
     return;
