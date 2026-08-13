@@ -513,3 +513,12 @@ calendarModal.addEventListener("click", (e) => {
 
 // ---- Initial load ----
 loadTasks();
+const dateEl = document.getElementById("current-date");
+if (dateEl) {
+  const today = new Date();
+  dateEl.textContent = today.toLocaleDateString(undefined, {
+    weekday: "long",
+    month: "long",
+    day: "numeric",
+  });
+}
