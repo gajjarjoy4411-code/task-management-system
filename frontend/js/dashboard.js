@@ -161,6 +161,7 @@ function setTrend(elId, count) {
 
 // ---- Load tasks ----
 let allTasksCache = [];
+const emptyMsg = document.getElementById("empty-msg");
 
 async function loadTasks() {
   const search = document.getElementById("search-input").value;
@@ -195,7 +196,7 @@ function sortByPriority(tasks) {
 // ---- Render tasks ----
 function renderTasks(tasks, hasActiveFilters = false) {
   const list = document.getElementById("task-list");
-  const emptyMsg = document.getElementById("empty-msg");
+ 
 
   list.innerHTML = "";
 

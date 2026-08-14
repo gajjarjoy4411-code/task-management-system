@@ -162,6 +162,7 @@ document.getElementById("task-form").addEventListener("submit", async (e) => {
 
 // ---- Load / render tasks ----
 let allTasksCache = [];
+const emptyMsg = document.getElementById("empty-msg");
 
 async function loadAllTasks() {
   const search = document.getElementById("search-input").value;
@@ -194,7 +195,7 @@ function sortByPriority(tasks) {
 }
 function renderAllTasks(tasks, hasActiveFilters = false) {
   const list = document.getElementById("task-list");
-  const emptyMsg = document.getElementById("empty-msg");
+
 
   list.innerHTML = "";
 
