@@ -8,10 +8,7 @@ const router = express.Router();
 router.use(protect);
 
 const DEFAULT_WORKSPACES = [
-  { name: "Personal", icon: "🟠", isDefault: true },
-  { name: "Work", icon: "🟣", isDefault: true },
-  { name: "Study", icon: "🟢", isDefault: true },
-  { name: "Freelance", icon: "🔵", isDefault: true },
+
 ];
 
 // @route   GET /api/workspaces
