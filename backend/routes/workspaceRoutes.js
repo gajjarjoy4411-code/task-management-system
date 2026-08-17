@@ -8,10 +8,6 @@ const router = express.Router();
 router.use(protect);
 
 const DEFAULT_WORKSPACES = [
-
-
-
-
 ];
 
 // @route   GET /api/workspaces
@@ -57,7 +53,6 @@ router.post("/", async (req, res, next) => {
     next(err);
   }
 });
-
 // @route   DELETE /api/workspaces/:id
 // @desc    Delete a workspace. Any tasks in it are moved to "Personal" first.
 router.delete("/:id", async (req, res, next) => {
@@ -68,18 +63,13 @@ router.delete("/:id", async (req, res, next) => {
     if (workspace.user.toString() !== req.user.id) {
       return res.status(401).json({ msg: "Not allowed" });
     }
-    if (workspace.name === "Personal") {
-      return res.status(400).json({ msg: "The Personal workspace can't be deleted" });
-    }
-
     // Move any tasks out of this workspace before deleting it
     await Task.updateMany(
       { user: req.user.id, workspace: workspace.name },
-      { $set: { workspace: "Personal" } }
+      { $set: { workspace: "" } }
     );
 
     await workspace.deleteOne();
-
     res.json({ msg: "Workspace deleted" });
   } catch (err) {
     next(err);
