@@ -9,6 +9,9 @@ router.use(protect);
 
 const DEFAULT_WORKSPACES = [
 
+
+
+
 ];
 
 // @route   GET /api/workspaces

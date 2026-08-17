@@ -64,7 +64,7 @@ document.querySelectorAll(".priority-option").forEach((btn) => {
 function openDrawerForNewTask() {
   document.getElementById("task-form").reset();
   document.getElementById("task-id").value = "";
-  workspaceInput.value = currentWorkspaceFilter || "Personal";
+  workspaceInput.value = currentWorkspaceFilter || "";
   setPriority("medium");
   drawerTitle.textContent = "New Task";
   submitBtn.textContent = "+ Add Task";
@@ -98,7 +98,7 @@ function fillFormWith(task) {
   document.getElementById("task-id").value = task._id;
   titleInput.value = task.title;
   descInput.value = task.description || "";
-  workspaceInput.value = task.workspace || "Personal";
+  workspaceInput.value = task.workspace || "";
   setPriority(task.priority || "medium");
   deadlineInput.value = task.deadline
     ? new Date(task.deadline).toISOString().split("T")[0]

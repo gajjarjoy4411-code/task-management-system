@@ -19,7 +19,7 @@ const taskSchema = new mongoose.Schema(
     },
     workspace: {
       type: String,
-      default: "Personal",
+      default: "",
       trim: true,
     },
     priority: {

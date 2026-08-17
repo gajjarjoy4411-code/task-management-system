@@ -246,7 +246,7 @@ function renderWorkspaceTabs() {
       (w) => `
       <button class="workspace-tab ${currentWorkspaceFilter === w.name ? "active" : ""}" data-workspace="${escapeHtml(w.name)}">
         ${w.icon} ${escapeHtml(w.name)}
-        ${w.name !== "Personal" ? `<span class="workspace-delete" data-id="${w._id}" title="Delete workspace">×</span>` : ""}
+        <span class="workspace-delete" data-id="${w._id}" title="Delete workspace">×</span>
       </button>
     `
     )
