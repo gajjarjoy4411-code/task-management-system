@@ -182,7 +182,47 @@ async function loadTasks() {
 
   allTasksCache = sortByPriority(tasks);
   renderTasks(allTasksCache, hasActiveFilters);
+  renderFocusWidget(allTasksCache);
   loadStats();
+}
+
+function renderFocusWidget(tasks) {
+  const widget = document.getElementById("focus-widget");
+  const list = document.getElementById("focus-list");
+  if (!widget || !list) return;
+
+  const todayStr = new Date().toISOString().split("T")[0];
+
+  const focusTasks = tasks
+    .filter((t) => t.status !== "completed")
+    .filter((t) => {
+      const isHigh = t.priority === "high";
+      const isDueToday =
+        t.deadline && new Date(t.deadline).toISOString().split("T")[0] === todayStr;
+      return isHigh || isDueToday;
+    })
+    .slice(0, 5);
+
+  if (focusTasks.length === 0) {
+    widget.style.display = "none";
+    return;
+  }
+
+  widget.style.display = "block";
+
+  list.innerHTML = focusTasks
+    .map((t) => {
+      const isDueToday =
+        t.deadline && new Date(t.deadline).toISOString().split("T")[0] === todayStr;
+      return `
+        <div class="focus-item">
+          <span class="focus-dot priority-${t.priority}"></span>
+          <span class="focus-item-title">${escapeHtml(t.title)}</span>
+          <span class="focus-item-tag">${isDueToday ? "Due today" : t.priority}</span>
+        </div>
+      `;
+    })
+    .join("");
 }
 
 function sortByPriority(tasks) {
