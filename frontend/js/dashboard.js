@@ -246,7 +246,10 @@ function openFocusModal() {
   modalList.innerHTML = allFocusTasks.map((t) => focusItemHtml(t, todayStr)).join("");
   modal.classList.add("open");
 }
-
+document.getElementById("focus-widget").addEventListener("click", () => {
+  if (allFocusTasks.length === 0) return;
+  openFocusModal();
+});
 document.getElementById("close-focus-modal-btn").addEventListener("click", () => {
   document.getElementById("focus-modal").classList.remove("open");
 });

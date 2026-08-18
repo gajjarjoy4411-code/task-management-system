@@ -1632,6 +1632,7 @@ select.status-select {
   border-radius: 14px;
   padding: 16px 18px;
   margin-bottom: 24px;
+  cursor: pointer;
 }
 
 .focus-title {
