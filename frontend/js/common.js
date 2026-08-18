@@ -147,8 +147,22 @@ async function loadNotifications() {
 
   document.querySelectorAll(".notif-item.unread").forEach((item) => {
     item.addEventListener("click", async () => {
+      // Update the screen instantly so it doesn't feel laggy...
+      item.classList.remove("unread");
+
+      const badge = document.getElementById("notif-badge");
+      const currentCount = parseInt(badge.textContent, 10) || 0;
+      const newCount = Math.max(0, currentCount - 1);
+
+      if (newCount > 0) {
+        badge.textContent = newCount > 9 ? "9+" : newCount;
+        badge.style.display = "flex";
+      } else {
+        badge.style.display = "none";
+      }
+
+      // ...then save it for real in the background
       await apiFetch(`/notifications/${item.dataset.id}/read`, { method: "PUT" });
-      loadNotifications();
     });
   });
 }
