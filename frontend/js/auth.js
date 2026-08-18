@@ -79,3 +79,13 @@ document.getElementById("register-form").addEventListener("submit", async (e) =>
     errorEl.textContent = "Could not connect to server. Is the backend running?";
   }
 });
+// ---- Show/hide password toggle ----
+document.querySelectorAll(".toggle-password-btn").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const input = document.getElementById(btn.dataset.target);
+    const isHidden = input.type === "password";
+    input.type = isHidden ? "text" : "password";
+    btn.textContent = isHidden ? "🙈" : "👁️";
+    btn.title = isHidden ? "Hide password" : "Show password";
+  });
+});
