@@ -1676,3 +1676,28 @@ select.status-select {
   color: var(--color-text-muted);
   text-transform: capitalize;
 }
+.focus-more-btn {
+  background: none;
+  border: none;
+  color: var(--color-accent);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 4px 0 0;
+  text-align: left;
+}
+
+.focus-more-btn:hover {
+  text-decoration: underline;
+}
+
+.focus-modal-box {
+  max-width: 380px;
+  text-align: left;
+}
+
+.focus-modal-box .focus-list {
+  max-height: 320px;
+  overflow-y: auto;
+  margin-top: 4px;
+}

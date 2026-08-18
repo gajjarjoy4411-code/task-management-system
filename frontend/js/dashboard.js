@@ -186,6 +186,20 @@ async function loadTasks() {
   loadStats();
 }
 
+let allFocusTasks = [];
+
+function focusItemHtml(t, todayStr) {
+  const isDueToday =
+    t.deadline && new Date(t.deadline).toISOString().split("T")[0] === todayStr;
+  return `
+    <div class="focus-item">
+      <span class="focus-dot priority-${t.priority}"></span>
+      <span class="focus-item-title">${escapeHtml(t.title)}</span>
+      <span class="focus-item-tag">${isDueToday ? "Due today" : t.priority}</span>
+    </div>
+  `;
+}
+
 function renderFocusWidget(tasks) {
   const widget = document.getElementById("focus-widget");
   const list = document.getElementById("focus-list");
@@ -193,37 +207,55 @@ function renderFocusWidget(tasks) {
 
   const todayStr = new Date().toISOString().split("T")[0];
 
-  const focusTasks = tasks
+  allFocusTasks = tasks
     .filter((t) => t.status !== "completed")
     .filter((t) => {
       const isHigh = t.priority === "high";
       const isDueToday =
         t.deadline && new Date(t.deadline).toISOString().split("T")[0] === todayStr;
       return isHigh || isDueToday;
-    })
-    .slice(0, 5);
+    });
 
-  if (focusTasks.length === 0) {
+  if (allFocusTasks.length === 0) {
     widget.style.display = "none";
     return;
   }
 
   widget.style.display = "block";
 
-  list.innerHTML = focusTasks
-    .map((t) => {
-      const isDueToday =
-        t.deadline && new Date(t.deadline).toISOString().split("T")[0] === todayStr;
-      return `
-        <div class="focus-item">
-          <span class="focus-dot priority-${t.priority}"></span>
-          <span class="focus-item-title">${escapeHtml(t.title)}</span>
-          <span class="focus-item-tag">${isDueToday ? "Due today" : t.priority}</span>
-        </div>
-      `;
-    })
-    .join("");
+  const visibleTasks = allFocusTasks.slice(0, 3);
+  const remaining = allFocusTasks.length - visibleTasks.length;
+
+  list.innerHTML =
+    visibleTasks.map((t) => focusItemHtml(t, todayStr)).join("") +
+    (remaining > 0
+      ? `<button id="focus-more-btn" class="focus-more-btn">+${remaining} more</button>`
+      : "");
+
+  const moreBtn = document.getElementById("focus-more-btn");
+  if (moreBtn) {
+    moreBtn.addEventListener("click", openFocusModal);
+  }
 }
+
+function openFocusModal() {
+  const modal = document.getElementById("focus-modal");
+  const modalList = document.getElementById("focus-modal-list");
+  const todayStr = new Date().toISOString().split("T")[0];
+
+  modalList.innerHTML = allFocusTasks.map((t) => focusItemHtml(t, todayStr)).join("");
+  modal.classList.add("open");
+}
+
+document.getElementById("close-focus-modal-btn").addEventListener("click", () => {
+  document.getElementById("focus-modal").classList.remove("open");
+});
+
+document.getElementById("focus-modal").addEventListener("click", (e) => {
+  if (e.target.id === "focus-modal") {
+    document.getElementById("focus-modal").classList.remove("open");
+  }
+});
 
 function sortByPriority(tasks) {
   const order = { high: 0, medium: 1, low: 2 };
