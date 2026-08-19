@@ -126,8 +126,8 @@ body {
   justify-content: center;
 }
 
-.brand-icon { color: var(--color-accent); font-size: 22px; }
-.brand h1 { font-size: 24px; font-weight: 700; letter-spacing: -0.5px; }
+.brand-icon { color: var(--color-accent); font-size: 28px; }
+.brand h1 { font-size: 30px; font-weight: 800; letter-spacing: -0.5px; }
 
 /* ============================================================
    AUTH PAGE
@@ -146,15 +146,15 @@ body {
   background: var(--card-bg);
   border: 1px solid var(--card-border);
   backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20x);
   border-radius: 20px;
-  padding: 40px;
+  padding: 32px 36px;
   width: 100%;
-  max-width: 400px;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+  max-width: 420px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4)
 }
 
-.subtitle { text-align: center; color: var(--color-text-muted); font-size: 14px; margin: 6px 0 28px; }
+.subtitle { text-align: center; color: var(--color-text-muted); font-size: 14px; margin: 8px 0 22px; }
 
 .tabs {
   display: flex;
@@ -178,10 +178,10 @@ body {
 
 .tab-btn.active { background: var(--color-accent); color: #1a1625; }
 
-.auth-form { display: none; flex-direction: column; gap: 6px; }
+.auth-form { display: none; flex-direction: column; gap: 16px; }
 .auth-form.active { display: flex; }
 
-label { font-size: 13px; font-weight: 600; color: var(--color-text-muted); margin-top: 8px; }
+label { font-size: 13px; font-weight: 600; color: var(--color-text-muted); margin-top: 0; display: block; margin-bottom: 6px; }
 
 input, select {
   padding: 12px 14px;
