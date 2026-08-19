@@ -2,7 +2,11 @@
 if (localStorage.getItem("token")) {
   window.location.href = "dashboard.html";
 }
-
+function showToast(message) {
+  const toast = document.getElementById("toast");
+  toast.textContent = message;
+  toast.classList.add("show");
+}
 // ---- Tab switching ----
 const tabBtns = document.querySelectorAll(".tab-btn");
 const forms = document.querySelectorAll(".auth-form");
@@ -74,7 +78,11 @@ document.getElementById("register-form").addEventListener("submit", async (e) =>
 
     localStorage.setItem("token", data.token);
     localStorage.setItem("user", JSON.stringify(data.user));
-    window.location.href = "dashboard.html";
+
+    showToast("✓ Account created successfully!");
+    setTimeout(() => {
+      window.location.href = "dashboard.html";
+    }, 1200);
   } catch (err) {
     errorEl.textContent = "Could not connect to server. Is the backend running?";
   }

@@ -1808,3 +1808,27 @@ select.status-select {
   overflow-y: auto;
   margin-top: 4px;
 }
+
+.toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--color-surface);
+  border: 1px solid var(--card-border);
+  color: #7ee787;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 12px 22px;
+  border-radius: 10px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 300;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
