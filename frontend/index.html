@@ -45,17 +45,29 @@
     </form>
 
     <form id="register-form" class="auth-form">
-      <label>Name</label>
-      <input type="text" id="register-name" placeholder="Your name" required />
+      <label>Full name</label>
+      <input type="text" id="register-name" placeholder="John Doe" required />
 
-      <label>Email</label>
-      <input type="email" id="register-email" placeholder="you@example.com" required />
+      <label>Email address</label>
+      <input type="email" id="register-email" placeholder="john@example.com" required />
 
       <label>Password</label>
       <div class="password-wrap">
         <input type="password" id="register-password" placeholder="At least 6 characters" required minlength="6" />
         <button type="button" class="toggle-password-btn" data-target="register-password" title="Show password">👁️</button>
       </div>
+
+      <div class="password-strength" id="password-strength" style="display:none;">
+        <div class="strength-bar-track">
+          <div class="strength-bar-fill" id="strength-bar-fill"></div>
+        </div>
+        <span class="strength-label" id="strength-label"></span>
+      </div>
+
+      <label class="terms-row">
+        <input type="checkbox" id="register-terms" required />
+        <span>I agree to the <a href="#" target="_blank">Terms &amp; Privacy Policy</a></span>
+      </label>
 
       <button type="submit" class="btn-primary">Create Account</button>
       <p class="error-msg" id="register-error"></p>

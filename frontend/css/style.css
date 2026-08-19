@@ -146,12 +146,12 @@ body {
   background: var(--card-bg);
   border: 1px solid var(--card-border);
   backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20x);
+  -webkit-backdrop-filter: blur(20px);
   border-radius: 20px;
   padding: 32px 36px;
   width: 100%;
   max-width: 420px;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.4)
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
 }
 
 .subtitle { text-align: center; color: var(--color-text-muted); font-size: 14px; margin: 8px 0 22px; }
@@ -231,7 +231,55 @@ input, select {
   padding: 4px;
   line-height: 1;
 }
+.password-strength {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 2px;
+}
 
+.strength-bar-track {
+  flex: 1;
+  height: 6px;
+  border-radius: 4px;
+  background: var(--input-bg);
+  overflow: hidden;
+}
+
+.strength-bar-fill {
+  height: 100%;
+  width: 0%;
+  border-radius: 4px;
+  transition: width 0.25s ease, background 0.25s ease;
+}
+
+.strength-label {
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.terms-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--color-text-muted);
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.terms-row input {
+  width: auto;
+  margin-top: 2px;
+  accent-color: var(--color-accent);
+}
+
+.terms-row a {
+  color: var(--color-accent);
+  text-decoration: underline;
+}
 select option { color: #000000; background: #ffffff; }
 
 input::placeholder { color: var(--color-text-muted); }

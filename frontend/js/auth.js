@@ -89,3 +89,39 @@ document.querySelectorAll(".toggle-password-btn").forEach((btn) => {
     btn.title = isHidden ? "Hide password" : "Show password";
   });
 });
+
+// ---- Password strength meter ----
+function getPasswordStrength(password) {
+  let score = 0;
+  if (password.length >= 6) score++;
+  if (password.length >= 10) score++;
+  if (/[A-Z]/.test(password)) score++;
+  if (/[0-9]/.test(password)) score++;
+  if (/[^A-Za-z0-9]/.test(password)) score++;
+
+  if (score <= 1) return { percent: 20, label: "Weak", color: "#ef4444" };
+  if (score <= 2) return { percent: 45, label: "Fair", color: "#f0a868" };
+  if (score <= 3) return { percent: 70, label: "Good", color: "#eab308" };
+  return { percent: 100, label: "Strong", color: "#22c55e" };
+}
+
+const registerPasswordInput = document.getElementById("register-password");
+const strengthWrap = document.getElementById("password-strength");
+const strengthFill = document.getElementById("strength-bar-fill");
+const strengthLabel = document.getElementById("strength-label");
+
+registerPasswordInput.addEventListener("input", () => {
+  const value = registerPasswordInput.value;
+
+  if (!value) {
+    strengthWrap.style.display = "none";
+    return;
+  }
+
+  strengthWrap.style.display = "flex";
+  const { percent, label, color } = getPasswordStrength(value);
+  strengthFill.style.width = `${percent}%`;
+  strengthFill.style.background = color;
+  strengthLabel.textContent = label;
+  strengthLabel.style.color = color;
+});
