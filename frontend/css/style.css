@@ -200,6 +200,27 @@ body {
 
 label { font-size: 13px; font-weight: 600; color: var(--color-text-muted); margin-top: 0; display: block; margin-bottom: 6px; }
 
+.label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.label-row label {
+  margin: 0;
+}
+
+.forgot-link {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+.forgot-link:hover {
+  text-decoration: underline;
+}
+
 input, select {
   padding: 12px 14px;
   border: 1.5px solid var(--input-border);

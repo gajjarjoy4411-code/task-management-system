@@ -125,3 +125,9 @@ registerPasswordInput.addEventListener("input", () => {
   strengthLabel.textContent = label;
   strengthLabel.style.color = color;
 });
+
+// ---- Forgot password (placeholder — needs backend email flow to work) ----
+document.getElementById("forgot-password-link").addEventListener("click", (e) => {
+  e.preventDefault();
+  alert("Password reset isn't set up yet — this needs email support on the backend first.");
+});
