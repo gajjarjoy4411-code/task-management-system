@@ -1253,12 +1253,30 @@ select.status-select {
   border: 1.5px solid var(--card-border);
   background: var(--card-bg);
   color: var(--color-text-light);
-  font-size: 16px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: border-color 0.2s, background 0.2s;
+}
+
+.theme-toggle-btn .icon-sun,
+.theme-toggle-btn .icon-moon,
+.theme-toggle-floating .icon-sun,
+.theme-toggle-floating .icon-moon {
+  display: none;
+}
+
+[data-theme="dark"] .theme-toggle-btn .icon-sun,
+[data-theme="dark"] .theme-toggle-floating .icon-sun {
+  display: block;
+  color: #f0c168;
+}
+
+[data-theme="light"] .theme-toggle-btn .icon-moon,
+[data-theme="light"] .theme-toggle-floating .icon-moon {
+  display: block;
+  color: #6b6180;
 }
 
 .theme-toggle-btn:hover {
@@ -1278,7 +1296,6 @@ select.status-select {
   background: var(--card-bg);
   backdrop-filter: blur(10px);
   color: var(--color-text-light);
-  font-size: 17px;
   cursor: pointer;
   display: flex;
   align-items: center;

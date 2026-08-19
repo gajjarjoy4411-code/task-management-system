@@ -9,7 +9,7 @@ function updateThemeIcon() {
   const btn = document.getElementById("theme-toggle-btn");
   if (!btn) return;
   const current = document.documentElement.getAttribute("data-theme") || "dark";
-  btn.textContent = current === "dark" ? "🌙" : "☀️";
+  btn.title = current === "dark" ? "Switch to light mode" : "Switch to dark mode";
 }
 
 function setupThemeToggle() {
