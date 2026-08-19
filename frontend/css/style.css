@@ -328,8 +328,42 @@ input:focus, select:focus { border-color: var(--color-accent); }
   transition: background 0.2s, transform 0.1s;
 }
 
-.btn-primary:hover { background: var(--color-accent-hover); }
-.btn-primary:active { transform: scale(0.98); }
+.btn-primary:hover:not(:disabled) {
+  background: var(--color-accent-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(240, 168, 104, 0.35);
+}
+
+.btn-primary:active:not(:disabled) { transform: scale(0.98); }
+
+.btn-primary:disabled {
+  cursor: default;
+  opacity: 0.9;
+}
+
+.btn-label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn-spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(26, 22, 37, 0.3);
+  border-top-color: #1a1625;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.btn-primary.btn-success {
+  background: #22c55e;
+}
 
 .btn-secondary {
   background: transparent;

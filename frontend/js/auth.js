@@ -7,6 +7,21 @@ function showToast(message) {
   toast.textContent = message;
   toast.classList.add("show");
 }
+function setButtonState(btn, state, text) {
+  const label = btn.querySelector(".btn-label");
+  btn.disabled = state === "loading" || state === "success";
+  btn.classList.remove("btn-loading", "btn-success");
+
+  if (state === "loading") {
+    btn.classList.add("btn-loading");
+    label.innerHTML = `<span class="btn-spinner"></span> ${text}`;
+  } else if (state === "success") {
+    btn.classList.add("btn-success");
+    label.textContent = `✓ ${text}`;
+  } else {
+    label.textContent = text;
+  }
+}
 // ---- Tab switching ----
 const tabBtns = document.querySelectorAll(".tab-btn");
 const forms = document.querySelectorAll(".auth-form");
@@ -27,6 +42,9 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
   const errorEl = document.getElementById("login-error");
   errorEl.textContent = "";
 
+  const btn = document.getElementById("login-submit-btn");
+  setButtonState(btn, "loading", "Logging in...");
+
   const email = document.getElementById("login-email").value;
   const password = document.getElementById("login-password").value;
 
@@ -41,14 +59,20 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
 
     if (!res.ok) {
       errorEl.textContent = data.msg || "Login failed";
+      setButtonState(btn, "idle", "Log In");
       return;
     }
 
     localStorage.setItem("token", data.token);
     localStorage.setItem("user", JSON.stringify(data.user));
-    window.location.href = "dashboard.html";
+
+    setButtonState(btn, "success", "Logged In");
+    setTimeout(() => {
+      window.location.href = "dashboard.html";
+    }, 600);
   } catch (err) {
     errorEl.textContent = "Could not connect to server. Is the backend running?";
+    setButtonState(btn, "idle", "Log In");
   }
 });
 
@@ -57,6 +81,9 @@ document.getElementById("register-form").addEventListener("submit", async (e) =>
   e.preventDefault();
   const errorEl = document.getElementById("register-error");
   errorEl.textContent = "";
+
+  const btn = document.getElementById("register-submit-btn");
+  setButtonState(btn, "loading", "Creating...");
 
   const name = document.getElementById("register-name").value;
   const email = document.getElementById("register-email").value;
@@ -73,18 +100,22 @@ document.getElementById("register-form").addEventListener("submit", async (e) =>
 
     if (!res.ok) {
       errorEl.textContent = data.msg || "Registration failed";
+      setButtonState(btn, "idle", "Create Account");
       return;
     }
 
     localStorage.setItem("token", data.token);
     localStorage.setItem("user", JSON.stringify(data.user));
 
+    setButtonState(btn, "success", "Account Created");
     showToast("✓ Account created successfully!");
+
     setTimeout(() => {
       window.location.href = "dashboard.html";
     }, 1200);
   } catch (err) {
     errorEl.textContent = "Could not connect to server. Is the backend running?";
+    setButtonState(btn, "idle", "Create Account");
   }
 });
 // ---- Show/hide password toggle ----
