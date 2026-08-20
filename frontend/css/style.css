@@ -179,7 +179,7 @@ body {
   border-radius: 8px 8px 0 0;
   cursor: pointer;
   font-weight: 600;
-  color: #ffffff;
+  color: var(--color-text-light);
   transition: background-color 0.25s ease, color 0.25s ease;
   position: relative;
 }
@@ -207,7 +207,7 @@ body {
 .auth-form { display: none; flex-direction: column; gap: 16px; }
 .auth-form.active { display: flex; }
 
-label { font-size: 13px; font-weight: 600; color: #ffffff; margin-top: 0; display: block; margin-bottom: 6px; }
+label { font-size: 13px; font-weight: 600; color: var(--color-text-light); margin-top: 0; display: block; margin-bottom: 6px; }
 
 .label-row {
   display: flex;
