@@ -135,7 +135,7 @@ body {
   justify-content: center;
 }
 
-.brand-icon { color: var(--color-accent); font-size: 28px; }
+.brand-icon-svg { flex-shrink: 0; }
 .brand h1 { font-size: 30px; font-weight: 800; letter-spacing: -0.5px; }
 
 /* ============================================================
@@ -182,6 +182,10 @@ body {
   color: var(--color-text-light);
   transition: background-color 0.25s ease, color 0.25s ease;
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
 }
 
 .tab-btn:hover {

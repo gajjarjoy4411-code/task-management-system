@@ -23,28 +23,43 @@
 <div class="auth-container">
   <div class="auth-card">
     <div class="brand">
-      <span class="brand-icon">◆</span>
+      <svg class="brand-icon-svg" width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 2L22 12L12 22L2 12L12 2Z" fill="var(--color-accent)"/>
+        <path d="M12 7L17 12L12 17L7 12L12 7Z" fill="var(--color-bg-deep)" opacity="0.5"/>
+      </svg>
       <h1>Flowlist</h1>
     </div>
     <p class="subtitle">Organize your work. Find your flow.</p>
 
     <div class="tabs">
-      <button class="tab-btn active" data-tab="login">Login</button>
-      <button class="tab-btn" data-tab="register">Register</button>
+      <button class="tab-btn active" data-tab="login">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        Login
+      </button>
+      <button class="tab-btn" data-tab="register">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="17" y1="11" x2="23" y2="11"/></svg>
+        Register
+      </button>
     </div>
 
     <form id="login-form" class="auth-form active">
       <label>Email</label>
-      <input type="email" id="login-email" placeholder="you@example.com" required />
+      <div class="input-icon-wrap">
+        <svg class="input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z" opacity="0"/><path d="M22 6l-10 7L2 6"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg>
+        <input type="email" id="login-email" placeholder="you@example.com" required />
+      </div>
 
       <div class="label-row">
         <label>Password</label>
         <a href="#" id="forgot-password-link" class="forgot-link">Forgot password?</a>
       </div>
-      <input type="password" id="login-password" placeholder="••••••••" required />
+      <div class="input-icon-wrap">
+        <svg class="input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        <input type="password" id="login-password" placeholder="••••••••" required />
+      </div>
 
       <button type="submit" class="btn-primary" id="login-submit-btn">
-        <span class="btn-label">Log In</span>
+        <span class="btn-label">Log In <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
       </button>
       <p class="error-msg" id="login-error"></p>
     </form>
