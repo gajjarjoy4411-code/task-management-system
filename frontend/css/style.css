@@ -208,10 +208,10 @@ body {
   border-radius: 2px;
 }
 
-.auth-form { display: none; flex-direction: column; gap: 16px; }
+.auth-form { display: none; flex-direction: column; gap: 10px; }
 .auth-form.active { display: flex; }
 
-label { font-size: 13px; font-weight: 600; color: var(--color-text-light); margin-top: 0; display: block; margin-bottom: 6px; }
+label { font-size: 13px; font-weight: 600; color: var(--color-text-light); margin-top: 0; display: block; margin-bottom: 4px; }
 
 .label-row {
   display: flex;
@@ -235,7 +235,7 @@ label { font-size: 13px; font-weight: 600; color: var(--color-text-light); margi
 }
 
 input, select {
-  padding: 12px 14px;
+  padding: 13px 14px;
   border: 1.5px solid var(--input-border);
   background: var(--input-bg);
   color: var(--color-text-light);
