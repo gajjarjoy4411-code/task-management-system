@@ -2,7 +2,7 @@
    🎨 THEME CONTROL PANEL
    ============================================================ */
 :root {
-  --color-bg-deep: #1a1625;
+  --color-bg-deep: #14101f;
   --color-bg-mid: #241d33;
 
   --blob-amber: #f0a868;
@@ -14,10 +14,10 @@
   --color-accent-hover: #e0954f;
 
   --color-text-light: #f5f0ff;
-  --color-text-muted: #b3a9c7;
+  --color-text-muted: #c3b9d7;
 
-  --card-bg: rgba(255, 255, 255, 0.07);
-  --card-border: rgba(255, 255, 255, 0.12);
+  --card-bg: rgba(255, 255, 255, 0.06);
+  --card-border: rgba(240, 168, 104, 0.15);
   
   --status-pending: #f0a868;
   --status-progress: #4ecdc4;
@@ -160,7 +160,7 @@ body {
   padding: 32px 36px;
   width: 100%;
   max-width: 420px;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+  box-shadow: 0 24px 70px rgba(0,0,0,0.55), 0 0 40px rgba(240, 168, 104, 0.06);
 }
 
 .subtitle { text-align: center; color: var(--color-text-muted); font-size: 14px; margin: 8px 0 22px; }
@@ -303,7 +303,10 @@ input, select {
 select option { color: #000000; background: #ffffff; }
 
 input::placeholder { color: var(--color-text-muted); }
-input:focus, select:focus { border-color: var(--color-accent); }
+input:focus, select:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(240, 168, 104, 0.12);
+}
 
 .btn-primary {
   margin-top: 18px;
@@ -315,7 +318,8 @@ input:focus, select:focus { border-color: var(--color-accent); }
   font-weight: 700;
   font-size: 14px;
   cursor: pointer;
-  transition: background 0.2s, transform 0.1s;
+  transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
+  box-shadow: 0 6px 18px rgba(240, 168, 104, 0.25);
 }
 
 .btn-primary:hover:not(:disabled) {
