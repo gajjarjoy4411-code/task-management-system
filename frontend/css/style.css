@@ -249,29 +249,8 @@ input, select {
   padding-right: 42px;
 }
 
-.toggle-password-btn {
-  position: absolute;
-  top: 50%;
-  right: 10px;
-  transform: translateY(-50%);
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 15px;
-  padding: 4px;
-  line-height: 1;
-}
 
-/* Hide the browser's built-in password reveal icon (Edge/Chrome) so only our custom eye button shows */
-input[type="password"]::-ms-reveal,
-input[type="password"]::-ms-clear {
-  display: none;
-}
 
-input[type="password"]::-webkit-credentials-auto-fill-button,
-input[type="password"]::-webkit-strong-password-auto-fill-button {
-  display: none !important;
-}
 .password-strength {
   display: flex;
   align-items: center;
