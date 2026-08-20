@@ -253,6 +253,22 @@ input, select {
   padding-right: 42px;
 }
 
+.input-icon-wrap {
+  position: relative;
+}
+
+.input-icon-wrap .input-icon {
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  transform: translateY(-50%);
+  color: var(--color-text-muted);
+  pointer-events: none;
+}
+
+.input-icon-wrap input {
+  padding-left: 38px;
+}
 
 
 .password-strength {
