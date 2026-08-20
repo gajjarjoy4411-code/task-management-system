@@ -207,7 +207,7 @@ body {
 .auth-form { display: none; flex-direction: column; gap: 16px; }
 .auth-form.active { display: flex; }
 
-label { font-size: 13px; font-weight: 600; color: var(--color-text-muted); margin-top: 0; display: block; margin-bottom: 6px; }
+label { font-size: 13px; font-weight: 600; color: #ffffff; margin-top: 0; display: block; margin-bottom: 6px; }
 
 .label-row {
   display: flex;
