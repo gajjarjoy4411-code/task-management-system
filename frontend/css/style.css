@@ -1280,7 +1280,7 @@ select.status-select {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  border: 1.5px solid var(--card-border);
+  border: 1.5px solid var(--color-accent);
   background: var(--card-bg);
   backdrop-filter: blur(10px);
   color: var(--color-text-light);
@@ -1880,4 +1880,9 @@ select.status-select {
 .toast.show {
   opacity: 1;
   transform: translateX(-50%) translateY(0);
+}
+
+
+[data-theme="dark"] input[type="password"]::-ms-reveal {
+  filter: invert(1);
 }
