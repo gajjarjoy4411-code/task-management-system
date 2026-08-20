@@ -179,7 +179,7 @@ body {
   border-radius: 8px 8px 0 0;
   cursor: pointer;
   font-weight: 600;
-  color: var(--color-text-muted);
+  color: #ffffff;
   transition: background-color 0.25s ease, color 0.25s ease;
   position: relative;
 }
