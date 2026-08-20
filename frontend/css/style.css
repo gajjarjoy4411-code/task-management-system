@@ -425,7 +425,7 @@ input:focus, select:focus { border-color: var(--color-accent); }
   width: 38px;
   height: 38px;
   border-radius: 50%;
-  border: 1.5px solid var(--card-border);
+  border: 1.5px solid var(--color-accent);
   background: var(--card-bg);
   color: var(--color-text-light);
   font-size: 16px;
@@ -433,11 +433,10 @@ input:focus, select:focus { border-color: var(--color-accent); }
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: border-color 0.2s, background 0.2s;
+  transition: background 0.2s;
 }
 
 .notif-btn:hover {
-  border-color: var(--color-accent);
   background: var(--surface-alpha-2);
 }
 
@@ -579,7 +578,7 @@ input:focus, select:focus { border-color: var(--color-accent); }
   width: 38px;
   height: 38px;
   border-radius: 50%;
-  border: 1.5px solid var(--card-border);
+  border: 1.5px solid var(--color-accent);
   background: var(--card-bg);
   color: var(--color-text-light);
   font-size: 17px;
@@ -587,11 +586,10 @@ input:focus, select:focus { border-color: var(--color-accent); }
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: border-color 0.2s, background 0.2s;
+  transition: background 0.2s;
 }
 
 .profile-btn:hover {
-  border-color: var(--color-accent);
   background: var(--surface-alpha-2);
 }
 
@@ -1250,14 +1248,14 @@ select.status-select {
   width: 38px;
   height: 38px;
   border-radius: 50%;
-  border: 1.5px solid var(--card-border);
+  border: 1.5px solid var(--color-accent);
   background: var(--card-bg);
   color: var(--color-text-light);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: border-color 0.2s, background 0.2s;
+  transition: background 0.2s;
 }
 
 .theme-toggle-btn .icon-sun,
@@ -1377,6 +1375,7 @@ select.status-select {
   font-weight: 700;
   padding: 7px 12px;
   border-style: dashed;
+  border-color: var(--color-accent);
 }
 
 .workspace-form {
