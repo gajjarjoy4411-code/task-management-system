@@ -261,6 +261,17 @@ input, select {
   padding: 4px;
   line-height: 1;
 }
+
+/* Hide the browser's built-in password reveal icon (Edge/Chrome) so only our custom eye button shows */
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+  display: none;
+}
+
+input[type="password"]::-webkit-credentials-auto-fill-button,
+input[type="password"]::-webkit-strong-password-auto-fill-button {
+  display: none !important;
+}
 .password-strength {
   display: flex;
   align-items: center;
