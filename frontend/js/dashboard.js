@@ -594,6 +594,14 @@ calendarModal.addEventListener("click", (e) => {
 
 // ---- Initial load ----
 loadTasks();
+
+// Re-fetch tasks if this page is restored from the browser's
+// back/forward cache (e.g. clicking "Back" from My Tasks)
+window.addEventListener("pageshow", (event) => {
+  if (event.persisted) {
+    loadTasks();
+  }
+});
 const dateEl = document.getElementById("current-date");
 if (dateEl) {
   const today = new Date();

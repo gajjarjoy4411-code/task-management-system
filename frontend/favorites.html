@@ -3,12 +3,9 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Task Manager - Dashboard</title>
+<title>My Tasks</title>
 <link rel="stylesheet" href="css/style.css" />
 <script src="js/theme.js"></script>
-
-<!-- FullCalendar CSS -->
-<link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.css" rel="stylesheet">
 </head>
 <body>
 
@@ -70,107 +67,17 @@
 </aside>
 
 <div class="app-main" id="app-main">
-<div class="dashboard">
-  <header class="dashboard-header">
-    <div class="brand">
-      <span class="brand-icon">◆</span>
-      <h1>Flowlist</h1>
-    </div>
-
-    <div class="header-right">
-      <div class="header-right-top">
-        <span id="user-name"></span>
-
-        <button id="theme-toggle-btn" class="theme-toggle-btn" title="Toggle theme">
+<div class="mytasks-page">
+  <div class="mytasks-top-row">
+    <button onclick="history.back()" class="back-link">← Back</button>
+    <button id="theme-toggle-btn" class="theme-toggle-btn" title="Toggle theme">
   <svg class="icon-sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
   <svg class="icon-moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
 </button>
-
-        <div class="notif-menu">
-          <button id="notif-btn" class="notif-btn" title="Notifications">
-            🔔
-            <span id="notif-badge" class="notif-badge" style="display:none;">0</span>
-          </button>
-
-          <div id="notif-dropdown" class="notif-dropdown">
-            <div class="notif-header">
-              <span>Notifications</span>
-              <button id="mark-all-read-btn">Mark all read</button>
-            </div>
-            <div id="notif-list" class="notif-list">
-              <p class="notif-empty">No notifications yet.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="profile-menu">
-          <button id="profile-btn" class="profile-btn" title="Account">👤</button>
-
-          <div id="profile-dropdown" class="profile-dropdown">
-            <a href="profile.html">👤 My Profile</a>
-            <a href="mytasks.html">📋 My Tasks</a>
-            <a href="kanban.html">📊 Kanban Board</a>
-            <div class="divider"></div>
-            <button id="logout-btn-dropdown">🚪 Logout</button>
-          </div>
-        </div>
-      </div>
-      <div id="current-date" class="header-date"></div>
-    </div>
-  </header>
-
-  <!-- STATS -->
-  <section class="stats-grid">
-  <div class="stat-card total">
-  <div class="stat-icon stat-icon-total">
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3L2 8l10 5 10-5-10-5z"/><path d="M2 13l10 5 10-5"/><path d="M2 18l10 5 10-5"/></svg>
-</div>
-    <span class="stat-number" id="stat-total">0</span>
-    <span class="stat-label">Total</span>
-    <span class="stat-trend" id="trend-total"></span>
   </div>
-  <div class="stat-card pending">
-   <div class="stat-icon stat-icon-pending">
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
-</div>
-    <span class="stat-number" id="stat-pending">0</span>
-    <span class="stat-label">Pending</span>
-    <span class="stat-trend" id="trend-pending"></span>
-  </div>
-  <div class="stat-card in-progress">
-   <div class="stat-icon stat-icon-progress">
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-    <rect x="2" y="9" width="20" height="6" rx="3" stroke="currentColor" stroke-width="1.5"/>
-    <rect x="4" y="11" width="11" height="2" rx="1" fill="currentColor"/>
-  </svg>
-</div>
-    <span class="stat-number" id="stat-inprogress">0</span>
-    <span class="stat-label">In Progress</span>
-    <span class="stat-trend" id="trend-inprogress"></span>
-  </div>
-  <div class="stat-card completed">
-    <div class="stat-icon stat-icon-completed">
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg>
-</div>
-    <span class="stat-number" id="stat-completed">0</span>
-    <span class="stat-label">Completed</span>
-    <span class="stat-trend" id="trend-completed"></span>
-  </div>
-</section>
 
-  <!-- TODAY'S FOCUS -->
-  <section class="focus-widget" id="focus-widget" style="display:none;">
-    <p class="focus-title">✦ Today's Focus</p>
-    <div id="focus-list" class="focus-list"></div>
-  </section>
-
-  <!-- TASKS TOOLBAR -->
   <section class="tasks-toolbar">
-    <h2>Your Tasks</h2>
-    <div style="display:flex; gap:10px;">
-      <button id="calendar-view-btn" class="btn-secondary">📅 Calendar</button>
-      <button id="open-drawer-btn" class="btn-add-small">+ Add Task</button>
-    </div>
+    <h2>⭐ Favorites</h2>
   </section>
 
   <!-- WORKSPACES -->
@@ -178,7 +85,6 @@
     <button class="workspace-tab active" data-workspace="">All</button>
   </section>
 
-  <!-- FILTER / SEARCH -->
   <section class="filter-bar">
     <input type="text" id="search-input" placeholder="🔍 Search tasks..." />
     <select id="status-filter">
@@ -195,9 +101,8 @@
     </select>
   </section>
 
-  <!-- TASK LIST -->
   <section id="task-list" class="task-list">
-    <p class="empty-msg" id="empty-msg">No tasks yet. Add one above!</p>
+    <p class="empty-msg" id="empty-msg">No tasks yet.</p>
   </section>
 </div>
 
@@ -216,7 +121,7 @@
       <input type="text" id="task-title" placeholder="Task title..." required />
 
       <label>Description</label>
-      <textarea id="task-description" placeholder="Write as much as you need — this box grows with your text..." rows="8"></textarea>
+      <textarea id="task-description" placeholder="Write as much as you need — this box grows with your text..." rows="4"></textarea>
 
       <label>Workspace</label>
       <select id="task-workspace"></select>
@@ -237,16 +142,6 @@
     </form>
   </div>
 </div>
-<!-- FOCUS TASKS POPUP -->
-<div id="focus-modal" class="modal-overlay">
-  <div class="modal-box focus-modal-box">
-    <div class="drawer-header">
-      <h3>✦ Today's Focus</h3>
-      <button id="close-focus-modal-btn" class="icon-btn" title="Close">✕</button>
-    </div>
-    <div id="focus-modal-list" class="focus-list"></div>
-  </div>
-</div>
 
 <!-- DELETE CONFIRMATION POPUP -->
 <div id="delete-modal" class="modal-overlay">
@@ -259,28 +154,6 @@
     </div>
   </div>
 </div>
-
-<!-- CALENDAR POPUP -->
-<div id="calendar-modal" class="modal-overlay">
-  <div class="modal-box calendar-modal-box">
-    <div class="drawer-header">
-      <h3>📅 Calendar</h3>
-      <button id="close-calendar-btn" class="icon-btn" title="Close">✕</button>
-    </div>
-
-    <div id="dashboard-calendar"></div>
-
-    <div id="calendar-day-panel" class="calendar-day-panel">
-      <h4 id="calendar-day-title">Select a date</h4>
-      <div id="calendar-day-tasks" class="calendar-day-tasks">
-        <p class="notif-empty">Click a date to see tasks due that day.</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- FullCalendar JS -->
-<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
 
 <!-- ADD WORKSPACE POPUP -->
 <div id="add-workspace-modal" class="modal-overlay">
@@ -328,6 +201,6 @@
 
 <script src="js/config.js"></script>
 <script src="js/common.js"></script>
-<script src="js/dashboard.js"></script>
+<script src="js/favorites.js"></script>
 </body>
 </html>

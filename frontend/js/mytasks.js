@@ -350,3 +350,9 @@ document.getElementById("priority-filter").addEventListener("change", loadAllTas
 document.getElementById("search-input").addEventListener("input", debounce(loadAllTasks, 300));
 
 loadAllTasks();
+
+window.addEventListener("pageshow", (event) => {
+  if (event.persisted) {
+    loadAllTasks();
+  }
+});
