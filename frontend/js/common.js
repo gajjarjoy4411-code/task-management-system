@@ -29,13 +29,12 @@ async function apiFetch(path, options = {}) {
 
 // ---- Logout, wired up wherever a #logout-btn exists ----
 function setupLogout() {
-  const logoutBtn = document.getElementById("logout-btn");
-  if (!logoutBtn) return;
-
-  logoutBtn.addEventListener("click", () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    window.location.href = "index.html";
+  document.querySelectorAll("#logout-btn, #logout-btn-dropdown").forEach((logoutBtn) => {
+    logoutBtn.addEventListener("click", () => {
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+      window.location.href = "index.html";
+    });
   });
 }
 
@@ -404,12 +403,42 @@ function openDeleteWorkspaceModal(id) {
   window.openDeleteWorkspaceModal(id);
 }
 
+// ---- Sidebar collapse + active link ----
+function setupSidebar() {
+  const sidebar = document.getElementById("sidebar");
+  const appMain = document.getElementById("app-main");
+  const toggleBtn = document.getElementById("sidebar-toggle-btn");
+  if (!sidebar || !appMain) return;
+
+  const isCollapsed = localStorage.getItem("sidebarCollapsed") === "true";
+  if (isCollapsed) {
+    sidebar.classList.add("collapsed");
+    appMain.classList.add("sidebar-collapsed");
+  }
+
+  if (toggleBtn) {
+    toggleBtn.addEventListener("click", () => {
+      const nowCollapsed = sidebar.classList.toggle("collapsed");
+      appMain.classList.toggle("sidebar-collapsed", nowCollapsed);
+      localStorage.setItem("sidebarCollapsed", nowCollapsed);
+    });
+  }
+
+  const currentPage = window.location.pathname.split("/").pop() || "dashboard.html";
+  document.querySelectorAll(".sidebar-link[href]").forEach((link) => {
+    if (link.getAttribute("href") === currentPage) {
+      link.classList.add("active");
+    }
+  });
+}
+
 // Run on every page that includes this script
 document.addEventListener("DOMContentLoaded", () => {
   setupLogout();
   setupProfileMenu();
   setupNotificationMenu();
   setupWorkspaceModals();
+  setupSidebar();
   loadWorkspaces();
 
   const nameEl = document.getElementById("user-name");
